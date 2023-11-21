@@ -63,7 +63,7 @@ custom_style = """
 st.markdown(custom_style, unsafe_allow_html=True)
 
 # Connect to Google Sheets
-json_keyfile_path = "C:\\Users\\yoosi\\Networks\\pythonProject3\\key-sign-405213-52c8e94ac293.json"
+json_keyfile_path = "key-sign-405213-52c8e94ac293.json"
 scopes = ["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheet_id = "1_v-rcNL39CJwpsqA-Wa5c6uO1iiAEGH4A4ce5cw4xvY"  # Replace with your actual spreadsheet ID
 
@@ -149,7 +149,7 @@ def update_return_status(product_type, product_name, product_number, username):
 
 hide_st_style = """
             <style>
-            # MainMenu {visibility: hidden;}
+            MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
             </style>
