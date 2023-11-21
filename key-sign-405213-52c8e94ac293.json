@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "key-sign-405213",
+  "private_key_id": "52c8e94ac29315803aee322e8ac089ea764c9f74",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3mh8A7CywW6tV\nI2XuD7WGpX8hc4fetTTPHNDhkdch7FTCSu6j1ZBgx+lNWpfFpiVNy7qDqtK9XZuO\nJ/uBfPkeTSkWRDNBPOp6cO12VngX14cILga1fdO/kNIGdiNQxMTlCb8bjFBRQDL/\n4FJVkHFbMdEZSDNH+zcN9IBSnWdRtmzlzXAlBoyKQPLTqEjoG+cHEGZuFfFWDHZd\n+zYWNo0ROV0NnUkVeJlIsPY+LfcxBMwt4TmVrB0vkHRONCiGhANl3P+J5pZqvQYQ\n/dky2jaV4+HG73YBQtlRiLC1YrKlcXmecYS2ADI7pY4kmuN6Hit/IIUoS5aW3NpD\nQz6BqDsVAgMBAAECggEADfZylSdg3qiaBweCIPCg5XSAjpKyqoUtVvLiD8V/jtzi\nNURtkZgUOsf5PiC9mhJgk+ICdTDwheYwhkcUIWzXpS5JCaB2JWf0jQs5g95fk7CY\nXE7jw7ml+NOSpVsmpGXSc3iiR/4LvaIcPslYeZlahYzsUffjrn20WiNV/vJpgRU1\niGti6ax75YSHL+/BW8nynM5lTneNSSrqJZSPdLrM3tOSVEwx9fABnA6lbS515Als\n8agfTnZHXUJm5jFuX2o+gZCzGBg1EP3Ytq1TDhA2dV4IhaZRjD6++N9Mriijio+h\nIVLuxmbc9xh1pYeeovcKedHYhtuRSqoQrxvYNHPWoQKBgQDb3ioFIiHmTvBvftMP\ncOGSb+WTUnClrmFXF2GSZyTx+DsYznGbmuB7eqPycdFNs3p2Gq5QBzPsjSZ3821q\nT+VJzk5KPE5OjKf6HtTt4GR3U7cC0SkdijepU12lIscd+7ttU4nKKych1gB5BAJn\nCBlCUXpGasfZrWPfBqOXrnJmmwKBgQDVxkFy+D2IIdDjQZMAKqC6+OnKo9HkenUf\nQBeIFhev+IIcZQzy0F/YJsuaaE9a4JsiJDJzslfW34yzLmFsZdfy7KhbRZ4t6xT1\nhjCjPOyuH9av7TSDEYhZ7P+dKsixrGy3LypKtHi8rN2LkvhtG9ip2mwvgBP2HrgX\nHmTtE4QoDwKBgEHW2ExrOS2HS/aHStqf2dyJB31DPZpPirSSutQlcOnIhKHcCCcp\njLlNM1UBgkS7TxuYx8QNNB5M8k0PJx+jxyx/y+/s+SIKeq6qluaYwFz/Q5ljWuWO\nozZgUXWG4Yt3+1s0ndldbL10IPYcHkAOK8oxLeVySmBDzNlXWpusUHOrAoGBALnM\n69vCWLC2O3kZ6GtPoY2AhKsEgYxkxuFXclxsX0Ap7ORDC+MLKxKSfYoBuV8SMqOU\n9GjMjD4M5Jxj5ncxeWUBPj6+HoJofTn83M80R737nDwiHe8BURJfw7dVlUOfyonY\nq5hsjTfnw1LpdZRXjJPsbPVIC5FyF6y4VR4dRVMPAoGAMi4rWcijZ5NVWer0hbD1\nouVtCdLI7fSG/SaqJcSGthGdTYBBkigKO2gSlbvlNgouvKiu7bDuHr2PQAO0Atti\n/mKKPJ0B8H6bUXCpJau5mM8Y5A2dvOr1INpVmg5RoJTmN7dRragRJUpkzy1b0jPe\njuxQOY3A1oyDsG5WqN6IuPs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "drone-list@key-sign-405213.iam.gserviceaccount.com",
+  "client_id": "100003541522948034943",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/drone-list%40key-sign-405213.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
