@@ -161,10 +161,6 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-
-lottie_url = "https://lottie.host/6e9b893f-3edc-4f6f-84b3-93b659348d26/ABvaiqZlRk.json"
-st_lottie(lottie_url, height=300, key="cc")
-
 logo_path = "https://i.ibb.co/GcR8sGH/Digital-Systems-logo.png"
 st.image(logo_path, use_column_width=False, width=85)
 
