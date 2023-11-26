@@ -165,31 +165,11 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 lottie_url = "https://lottie.host/6e9b893f-3edc-4f6f-84b3-93b659348d26/ABvaiqZlRk.json"
 st_lottie(lottie_url, height=300, key="cc")
 
-# Load and display the logo image on top
 logo_path = "https://i.ibb.co/GcR8sGH/Digital-Systems-logo.png"
-st.markdown(
-    f"""
-    <style>
-        .logo-overlay {{
-            
-            position: fixed;
-            top: 10px;  /* Adjust the top position as needed */
-            right: 10px; /* Adjust the right position as needed */
-            width: 75px; /* Set the width of the logo */
-            height: 75px; /* Set the height of the logo */
-            z-index: 1; /* Ensure the logo is on top of other elements */
-        }}
-    </style>
-    <img src="{logo_path}" class="logo-overlay" />
-    """,
-    unsafe_allow_html=True,
-)
+st.image(logo_path, use_column_width=False, width=85)
 
-# lottie = load_lottieurl("https://lottie.host/6e9b893f-3edc-4f6f-84b3-93b659348d26/ABvaiqZlRk.json")
-# st_lottie(lottie,height=300,key="cc")
-#
-# logo_path = "https://i.ibb.co/GcR8sGH/Digital-Systems-logo.png"
-# st.image(logo_path, use_column_width=False, width=85)
+lottie = load_lottieurl("https://lottie.host/6e9b893f-3edc-4f6f-84b3-93b659348d26/ABvaiqZlRk.json")
+st_lottie(lottie,height=300,key="cc")
 
 st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
