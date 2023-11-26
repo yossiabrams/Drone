@@ -233,6 +233,6 @@ else:
     st.warning("Incorrect username. Access denied.")
 st.markdown("""
     <div style="margin-top: 20px; padding: 20px;  color: #281100; text-align: center;">
-        <p>פותח על ידי יוסי אברמס עבור 'חשיפה ודיגיטל' </p>
+        <p>פותחחחח על ידי יוסי אברמס עבור 'חשיפה ודיגיטל' </p>
     </div>
 """, unsafe_allow_html=True)
