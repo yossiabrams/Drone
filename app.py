@@ -74,6 +74,8 @@ def load_lottieurl(url):
     if r.status_code != 200:
         return None
     return r.json()
+
+
 def get_worksheet(product_type):
     try:
         service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
@@ -101,10 +103,9 @@ def get_worksheet(product_type):
             raise
 
 def countdown_timer(duration):
-    with st.spinner(" "):  # Use a space to create an empty spinner
-        for remaining in range(duration, 0, -1):
-            st.spinner(f"Quota exceeded. Waiting for {remaining} seconds...").update()
-            time.sleep(1)
+    for remaining in range(duration, 0, -1):
+        st.write(f"Quota exceeded. Waiting for {remaining} seconds...")
+        time.sleep(1)
 
 
 def update_taken_status(product_type, product_name, product_number, username):
