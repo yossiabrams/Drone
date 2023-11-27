@@ -76,7 +76,6 @@ def load_lottieurl(url):
     return r.json()
 def get_worksheet(product_type):
     try:
-        # Make a dummy request to force token refresh if needed
         service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
         range_name = f"{product_type}!A:C"
         result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
@@ -88,7 +87,8 @@ def get_worksheet(product_type):
     except HttpError as err:
         if err.resp.status == 429:  # Quota exceeded error
             st.error(f"Quota exceeded for the Google Sheets API. Waiting for a minute before retrying...")
-            time.sleep(20)  # Wait for a minute
+            # Display a pop-up with countdown
+            countdown_timer(60)
             return get_worksheet(product_type)  # Retry the API call
         else:
             # Print detailed information about the HTTP error
@@ -100,7 +100,11 @@ def get_worksheet(product_type):
                 st.error("Spreadsheet not found. Double-check the spreadsheet_id.")
             raise
 
-
+def countdown_timer(duration):
+    with st.spinner(" "):  # Use a space to create an empty spinner
+        for remaining in range(duration, 0, -1):
+            st.spinner(f"Quota exceeded. Waiting for {remaining} seconds...").update()
+            time.sleep(1)
 
 
 def update_taken_status(product_type, product_name, product_number, username):
@@ -215,6 +219,6 @@ else:
     st.warning("Incorrect username. Access denied.")
 st.markdown("""
     <div style="margin-top: 20px; padding: 20px;  color: #281100; text-align: center;">
-        <p>פותח על ידי יוסי אברמס עבור 'חשיפה ודיגיטל' </p>
+        <p>פותחחחח על ידי יוסי אברמס עבור 'חשיפה ודיגיטל' </p>
     </div>
 """, unsafe_allow_html=True)
