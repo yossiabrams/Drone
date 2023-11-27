@@ -75,9 +75,27 @@ def load_lottieurl(url):
         return None
     return r.json()
 
+last_request_time = 0
+def rate_limit():
+    global last_request_time
+    current_time = time.time()
+    elapsed_time = current_time - last_request_time
+
+    # Set the minimum time between requests (e.g., 60 seconds)
+    min_time_between_requests = 60
+
+    if elapsed_time < min_time_between_requests:
+        # Sleep to ensure the minimum time between requests is met
+        time.sleep(min_time_between_requests - elapsed_time)
+
+    # Update the last request time
+    last_request_time = time.time()
 
 def get_worksheet(product_type):
     try:
+        # Apply rate limiting before making the API call
+        rate_limit()
+
         service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
         range_name = f"{product_type}!A:C"
         result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
@@ -90,7 +108,7 @@ def get_worksheet(product_type):
         if err.resp.status == 429:  # Quota exceeded error
             st.error(f"Quota exceeded for the Google Sheets API. Waiting for a minute before retrying...")
             # Display a pop-up with countdown
-            countdown_timer(60)
+            countdown_timer(10)
             return get_worksheet(product_type)  # Retry the API call
         else:
             # Print detailed information about the HTTP error
@@ -103,9 +121,10 @@ def get_worksheet(product_type):
             raise
 
 def countdown_timer(duration):
-    for remaining in range(duration, 0, -1):
-        st.write(f"Quota exceeded. Waiting for {remaining} seconds...")
-        time.sleep(1)
+    with st.spinner(" "):  # Use a space to create an empty spinner
+        for remaining in range(duration, 0, -1):
+            st.spinner(f"Quota exceeded. Waiting for {remaining} seconds...").update()
+            time.sleep(1)
 
 
 def update_taken_status(product_type, product_name, product_number, username):
