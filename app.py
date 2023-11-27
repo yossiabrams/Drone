@@ -5,6 +5,7 @@ from google.auth.exceptions import RefreshError
 import requests
 from streamlit_lottie import st_lottie
 from googleapiclient.errors import HttpError
+import time
 
 
 allowed_usernames = ["yossi", "edi","ziv"]
@@ -85,14 +86,19 @@ def get_worksheet(product_type):
         st.error(f"Error refreshing credentials: {e}")
         raise
     except HttpError as err:
-        # Print detailed information about the HTTP error
-        st.error(f"HTTP error occurred: {err.resp.status} - {err._get_reason()}")
-        st.error(f"Error details: {err.content}")
-        if err.resp.status == 403:
-            st.error("Make sure the service account has the necessary permissions to access the spreadsheet.")
-        elif err.resp.status == 404:
-            st.error("Spreadsheet not found. Double-check the spreadsheet_id.")
-        raise
+        if err.resp.status == 429:  # Quota exceeded error
+            st.error(f"Quota exceeded for the Google Sheets API. Waiting for a minute before retrying...")
+            time.sleep(20)  # Wait for a minute
+            return get_worksheet(product_type)  # Retry the API call
+        else:
+            # Print detailed information about the HTTP error
+            st.error(f"HTTP error occurred: {err.resp.status} - {err._get_reason()}")
+            st.error(f"Error details: {err.content}")
+            if err.resp.status == 403:
+                st.error("Make sure the service account has the necessary permissions to access the spreadsheet.")
+            elif err.resp.status == 404:
+                st.error("Spreadsheet not found. Double-check the spreadsheet_id.")
+            raise
 
 
 
