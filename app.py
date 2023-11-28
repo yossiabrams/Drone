@@ -171,13 +171,12 @@ st_lottie(lottie, height=300, key="cc")
 st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
 
-match password:
-    case "123":
-        username = "יוסי אברמס"
-    case "evi":
-        username = "אביתר כהן"
-    case "ziv":
-        username = "זיו"
+if password == "yossi":
+    username = "יוסי אברמס"
+elif password == "edi":
+    username = "אביתר כהן"
+elif password == "ziv":
+    username = "זיו בן שבת"
 
 product_types = ["רחפן", "סוללה", "מטען", "שלט"]
 
