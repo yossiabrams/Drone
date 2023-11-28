@@ -6,7 +6,7 @@ import requests
 from streamlit_lottie import st_lottie
 from googleapiclient.errors import HttpError
 
-allowed_usernames = ["yossi", "edi", "ziv"]
+allowed_usernames = ["123", "evi", "ziv"]
 
 st.set_page_config(
     page_title="ארון ציוד",
@@ -54,17 +54,14 @@ custom_style = """
 """
 st.markdown(custom_style, unsafe_allow_html=True)
 
-# Connect to Google Sheets
 json_keyfile_path = "key-sign-405213-52c8e94ac293.json"
 scopes = ["https://www.googleapis.com/auth/spreadsheets"]
 spreadsheet_id = "1_v-rcNL39CJwpsqA-Wa5c6uO1iiAEGH4A4ce5cw4xvY"  # Replace with your actual spreadsheet ID
 
-# Load credentials
 credentials = service_account.Credentials.from_service_account_file(
     json_keyfile_path, scopes=scopes
 )
 
-# Build the Sheets API client
 service = build("sheets", "v4", credentials=credentials)
 
 
@@ -77,7 +74,6 @@ def load_lottieurl(url):
 
 def get_worksheet(product_type):
     try:
-        # Make a dummy request to force token refresh if needed
         service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
         range_name = f"{product_type}!A:C"
         result = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
@@ -87,7 +83,6 @@ def get_worksheet(product_type):
         st.error(f"Error refreshing credentials: {e}")
         raise
     except HttpError as err:
-        # Print detailed information about the HTTP error
         st.error(f"HTTP error occurred: {err.resp.status} - {err._get_reason()}")
         st.error(f"Error details: {err.content}")
         if err.resp.status == 403:
@@ -99,24 +94,44 @@ def get_worksheet(product_type):
 
 def update_taken_status(product_type, product_name, product_number, username):
     try:
-        with st.spinner(f"Processing {product_type}..."):
-            # Rest of your existing code
-            if st.button(f"לקחת {product_type}", key=f"take_{product_type}"):
-                update_taken_status(product_type, selected_product_name, selected_product_number, password)
-                st.button(f"לקחת {product_type}", disabled=True)
+        product_data = get_worksheet(product_type)
+
+        if any(item[0] == product_name and item[1] == product_number and item[2] == "Taken" for item in product_data if
+               len(item) > 2):
+            st.warning(f"המוצר:  {product_name} {product_number} is already taken.")
+        else:
+            matching_items = [(i, item) for i, item in enumerate(product_data) if
+                              item and item[0] == product_name and item[1] == product_number]
+
+            if matching_items:
+                row_index, _ = matching_items[0]
+                range_name = f"{product_type}!C{row_index + 1}"
+                update_body = {"values": [[f"נלקח על ידי {username}"]]}
+                service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_name, body=update_body,
+                                                       valueInputOption="RAW").execute()
+                st.success(f"המוצר:' {product_name} {product_number}' מסומן כ  'נלקח על ידי {username}'")
+            else:
+                st.warning(f"המוצר  {product_name} {product_number} לא נמצא")
 
     except RefreshError as e:
         st.error(f"Error refreshing credentials: {e}")
         raise
-
-
 def update_return_status(product_type, product_name, product_number, username):
     try:
-        with st.spinner(f"Processing {product_type}..."):
-            # Rest of your existing code
-            if st.button(f"להחזיר {product_type}", key=f"return_{product_type}"):
-                update_return_status(product_type, selected_product_name, selected_product_number, password)
-                st.button(f"להחזיר {product_type}", disabled=True)
+        product_data = get_worksheet(product_type)
+
+        matching_items = [(i, item) for i, item in enumerate(product_data) if
+                          item and item[0] == product_name and item[1] == product_number]
+
+        if matching_items:
+            row_index, _ = matching_items[0]
+            range_name = f"{product_type}!C{row_index + 1}"
+            update_body = {"values": [[f"הוחזר על ידי {username}"]]}
+            service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_name, body=update_body,
+                                                   valueInputOption="RAW").execute()
+            st.success(f"המוצר:' {product_name} {product_number}' מסומן כ  'הוחזר על ידי {username}'")
+        else:
+            st.warning(f"המוצר {product_name} {product_number} לא קיים")
 
     except RefreshError as e:
         st.error(f"Error refreshing credentials: {e}")
@@ -125,15 +140,6 @@ def update_return_status(product_type, product_name, product_number, username):
 
 hide_st_style = """
             <style>
-            ..st-emotion-cache-1s4j85f{}
-            .st-emotion-cache-u2h1j4{gap: 0rem;}
-            .st-emotion-cache-je0s9r{gap: 0rem;}
-            .st-emotion-cache-11jhoak { gap: 0rem;}
-            .st-emotion-cache-yqkwhy { gap: 0rem;}
-            .st-emotion-cache-do9jc5 { width: 344.8px;  position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
-            .st-emotion-cache-1lzqysu { width: 746.4px; position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
-            .st-emotion-cache-z5fcl4 { width: 100%; padding: 0rem 1rem 10rem; min-width: auto;max-width: initial;}
-            .st-emotion-cache-usbviu { width: 362.4px; position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
             MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
@@ -150,10 +156,16 @@ st_lottie(lottie,height=300,key="cc")
 st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
 
-# Product Types
+match password:
+    case "123":
+        username = "יוסי אברמס"
+    case "evi":
+        username = "אביתר כהן"
+    case "ziv":
+        username ="זיו"
+
 product_types = ["רחפן", "סוללה", "מטען", "שלט"]
 
-# Check if the password is in the list of allowed usernames
 if password in allowed_usernames:
     for product_type in product_types:
         st.header(product_type)
@@ -161,28 +173,22 @@ if password in allowed_usernames:
         with st.spinner(f'טוען {product_type}...'):
             product_data = get_worksheet(product_type)
 
-        # Extract unique product names and product numbers
         unique_product_names = list(set(item[0] for item in product_data if item))
         product_numbers = [item[1] for item in product_data if item]
 
-        # Create a dropdown for unique product names
         selected_product_name = st.selectbox(f"בחר דגם {product_type}:", unique_product_names,
                                              key=f"{product_type}_product_name")
 
-        # Create an edit line to select the product number
         selected_product_number = st.text_input(f"בחר מספר {product_type}:", key=f"{product_type}_product_number")
 
-        # Display selected product
+
         if selected_product_name and selected_product_number:
             st.write(f"המוצר הנבחר: {selected_product_name} {selected_product_number}")
-
-            # Add a button to mark the product as 'Taken'
             if st.button(f"לקחת {product_type}"):
-                update_taken_status(product_type, selected_product_name, selected_product_number, password)
+                update_taken_status(product_type, selected_product_name, selected_product_number, username)
 
-            # Add a button to mark the product as 'Returned'
             if st.button(f"להחזיר {product_type}"):
-                update_return_status(product_type, selected_product_name, selected_product_number, password)
+                update_return_status(product_type, selected_product_name, selected_product_number, username)
 
 
 else:
