@@ -171,12 +171,40 @@ st_lottie(lottie, height=300, key="cc")
 st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
 
-if password == "yossi":
+username = ""
+
+if password == "9377":
     username = "יוסי אברמס"
-elif password == "edi":
-    username = "אביתר כהן"
-elif password == "ziv":
+elif password == "8932":
     username = "זיו בן שבת"
+elif password == "2833":
+    username = "ניסים אללוף"
+elif password == "3226":
+    username = "שאול סטיוארט"
+elif password == "6613":
+    username = "אביתר כהן"
+elif password == "6249":
+    username = "קילא וולגל"
+elif password == "3522":
+    username = "תמיר הומינר"
+elif password == "0055":
+    username = "עלם ג'ועיה"
+elif password == "6521":
+    username = "אור כהן"
+elif password == "5237":
+    username = "דביר אליה"
+elif password == "5043":
+    username = "הלל לזר"
+elif password == "3729":
+    username = "אדוארד ניקול"
+elif password == "3424":
+    username = "כפיר ניגרקר"
+elif password == "6222":
+    username = "גבריאל אבראו"
+elif password == "8222":
+    username = "אורי דוד"
+elif password == "666":
+    username = "אורח"
 
 product_types = ["רחפן", "סוללה", "מטען", "שלט"]
 
