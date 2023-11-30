@@ -6,7 +6,7 @@ import requests
 from streamlit_lottie import st_lottie
 from googleapiclient.errors import HttpError
 
-allowed_usernames = ["123", "evi", "ziv"]
+allowed_usernames = ["9377","8932","2833","3226","6613","6249","3522","0055","6521","5237","5043","3729","3424","6222","8222","666"]
 
 st.set_page_config(
     page_title="ארון ציוד",
@@ -172,6 +172,8 @@ st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
 
 username = ""
+
+#"8932","2833","3226","6613","6249","3522","0055","6521","5237","5043","3729","3424","6222","8222","666"
 
 if password == "9377":
     username = "יוסי אברמס"
