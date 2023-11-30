@@ -17,6 +17,14 @@ st.set_page_config(
 
 custom_style = """
     <style>
+        .st-emotion-cache-u2h1j4{gap: 0rem;}
+        .st-emotion-cache-je0s9r{gap: 0rem;}
+        .st-emotion-cache-11jhoak { gap: 0rem;}
+        .st-emotion-cache-yqkwhy { gap: 0rem;}
+        .st-emotion-cache-do9jc5 { width: 344.8px;  position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
+        .st-emotion-cache-1lzqysu { width: 746.4px; position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
+        .st-emotion-cache-z5fcl4 { width: 100%; padding: 0rem 1rem 10rem; min-width: auto;max-width: initial;}
+        .st-emotion-cache-usbviu { width: 362.4px; position: relative; display: flex; flex: 1 1 0%; flex-direction: column; gap: 0rem;}
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
         body {
             margin-top: 0;
