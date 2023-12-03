@@ -6,8 +6,7 @@ import requests
 from streamlit_lottie import st_lottie
 from googleapiclient.errors import HttpError
 
-allowed_usernames = ["9377","8932","2833","3226","6613","6249","3522","0055","6521","5237","5043","3729","3424","6222","8222","666"]
-
+t = (("9377","יוסי אברמס"),("8932","זיו בן שבת"),("2833","ניסים אללוף"),("3226","שאול סטיוארט"),("6613","אביתר כהן"),("6249","קילא וולגל"),("3522","תמיר הוצינר"),("0055","עלם ג'ועיה"),("6521","אור כהן"),("5237","דביר אליה"),("5043","הלל לזר"),("3729","אדןארד ניקול"),("3424","כפיר ניגרקר"),("6222","גבריאל אבראו"),("8222","אורי דוד"),("666","אורח"))
 st.set_page_config(
     page_title="ארון ציוד",
     page_icon="https://cdn-icons-png.flaticon.com/128/1013/1013307.png",
@@ -171,46 +170,14 @@ st_lottie(lottie, height=300, key="cc")
 st.title("ארון ציוד")
 password = st.text_input(" הכנס את שם המשתמש:", type="password")
 
-username = ""
+tupletousername = next((index for index,item in enumerate(t) if item[0]== password),-1)
 
-#"8932","2833","3226","6613","6249","3522","0055","6521","5237","5043","3729","3424","6222","8222","666"
-
-if password == "9377":
-    username = "יוסי אברמס"
-elif password == "8932":
-    username = "זיו בן שבת"
-elif password == "2833":
-    username = "ניסים אללוף"
-elif password == "3226":
-    username = "שאול סטיוארט"
-elif password == "6613":
-    username = "אביתר כהן"
-elif password == "6249":
-    username = "קילא וולגל"
-elif password == "3522":
-    username = "תמיר הומינר"
-elif password == "0055":
-    username = "עלם ג'ועיה"
-elif password == "6521":
-    username = "אור כהן"
-elif password == "5237":
-    username = "דביר אליה"
-elif password == "5043":
-    username = "הלל לזר"
-elif password == "3729":
-    username = "אדוארד ניקול"
-elif password == "3424":
-    username = "כפיר ניגרקר"
-elif password == "6222":
-    username = "גבריאל אבראו"
-elif password == "8222":
-    username = "אורי דוד"
-elif password == "666":
-    username = "אורח"
 
 product_types = ["רחפן", "סוללה", "מטען", "שלט"]
 
-if password in allowed_usernames:
+if any(item[0] ==password for item in t) and tupletousername != -1:
+    username = t[tupletousername][1]
+    print(username)
     st.title(f"ברוך הבא {username}")
 
     for product_type in product_types:
